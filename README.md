@@ -4,7 +4,7 @@ This is the closet Raspberry Pi 3 machine emulation which is not running `Raspbi
 
 ## Motivation
 - The Raspberry Pi 3 shipped with an ARM `Cortex-A53` CPU which is not included in the QEMU supported machines yet.
-- For the Raspberry Pi 2, though the mathine is in the [supported list](https://wiki.qemu.org/Documentation/Platforms/ARM#Supported_Machines), I failed to emulate with `raspi2` using any of these methods ([1](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/)(black screen), [2](https://raspberrypi.stackexchange.com/a/71172)(CPUX: failed to come online), [3](http://blog.3mdeb.com/2015/12/30/emulate-rapberry-pi-2-in-qemu/)(only shows a raspberry logo)). (Checked on Aug 16, 2017)
+- For the Raspberry Pi 2, though the mathine is in the [supported list](https://wiki.qemu.org/Documentation/Platforms/ARM#Supported_Machines), I failed to emulate with `raspi2` using any of these methods [1](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) (black screen), [2](https://raspberrypi.stackexchange.com/a/71172) (CPUX: failed to come online), [3](http://blog.3mdeb.com/2015/12/30/emulate-rapberry-pi-2-in-qemu/) (only shows a raspberry logo). (Checked on Aug 16, 2017)
 - The method introduced in the [msdn blog](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) using `versatilepb` machine only supports up to 256MB of RAM which states clearly in the [QEMU wiki](https://wiki.qemu.org/Documentation/Platforms/ARM#Guidelines_for_choosing_a_QEMU_machine). Such configuration is hardly usable.
 - Therefore, currently my final cloest solution is to emulate the ARM `Cortex-A53` CPU with machine `virt` running the Debian 9 system.
 
