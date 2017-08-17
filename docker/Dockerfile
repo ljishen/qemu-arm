@@ -7,6 +7,10 @@ MAINTAINER Jianshen Liu <jliu120@ucsc.edu>
 RUN apt-get update \
     && apt-get install -y qemu
 
+# Clean Up
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ENV MEMORY 2G
 ENV VMLINUXZ /root/system/vmlinuz-4.9.0-3-arm64
 ENV INITRD_IMG /root/system/initrd.img-4.9.0-3-arm64
