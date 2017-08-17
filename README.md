@@ -31,11 +31,55 @@ docker run -it \
 
 ## Miscellaneous
 - The emulator sets up the [user networking](https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29) by default so the ICMP traffic does not work (e.g. no ping), but it is good for simple web access for the start.
-- Credit for this method goes to [this blog](https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/). You can also follow its guide if you want to create you own disk image in file. See the [docker/Dockerfile](https://github.com/ljishen/qemu-cortex-a53/blob/master/docker/Dockerfile) for the details of system default configurations.
+- Credit for this method goes to [this blog](https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/). I will briefly summarize the steps as follows in case the link breaks. You can always follow the guide if you want to create you own disk image in file. See the [docker/Dockerfile](https://github.com/ljishen/qemu-cortex-a53/blob/master/docker/Dockerfile) for the details of system default configurations.
 
-  The QEMU emulator `2.8.1` environment can be launched with
+  1. Launch the QEMU emulator `2.8.1` environment with
   ```bash
   docker run -it \
       -v `pwd`/system:/root/system \
-      ljishen/qemu-cortex-a53 bash
+      -v /lib/modules:/lib/modules \
+      -v /boot:/boot \
+      ljishen/qemu-cortex-a53 \
+      bash
   ```
+
+  1. Get the installer files
+  ```bash
+  cd ~
+  wget -O installer-linux http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/linux
+  wget -O installer-initrd.gz http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/initrd.gz
+  ```
+
+  1. Create an empty disk image
+  ```bash
+  qemu-img create -f system/qcow hda.qcow2 8G
+  ```
+
+  1. Run the OS installer (will take several hours)
+  ```bash
+  qemu-system-aarch64 -M virt -m 2G -smp `nproc` -cpu cortex-a53 \
+      -kernel installer-linux \
+      -initrd installer-initrd.gz \
+      -drive if=none,file=system/hda.qcow2,format=qcow,id=hd \
+      -device virtio-blk-pci,drive=hd \
+      -netdev user,id=mynet \
+      -device virtio-net-pci,netdev=mynet \
+      -nographic -no-reboot
+  ```
+  You will finally exit the QEMU env as the `-no-reboot` option supplies.
+
+  1. Extract the kernel to the `system` dir
+  ```bash
+  # Install libguestfs (will ask a few questions)
+  apt-get update && apt-get install libguestfs-tools
+
+  # Check the content of our disk image first
+  virt-ls -a system/hda.qcow2 /boot
+
+  virt-copy-out -a system/hda.qcow2 /boot/vmlinuz-4.9.0-3-arm64 /boot/initrd.img-4.9.0-3-arm64 system
+  
+  # Exit docker container
+  exit
+  ```
+
+  1. Now you are good to boot your own system using the same boot command as in the `Usage` section.
