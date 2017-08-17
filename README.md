@@ -43,19 +43,19 @@ docker run -it \
       bash
   ```
 
-  1. Get the installer files
+  2. Get the installer files
   ```bash
   cd ~
   wget -O installer-linux http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/linux
   wget -O installer-initrd.gz http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/initrd.gz
   ```
 
-  1. Create an empty disk image
+  3. Create an empty disk image
   ```bash
   qemu-img create -f system/qcow hda.qcow2 8G
   ```
 
-  1. Run the OS installer (will take several hours)
+  4. Run the OS installer (will take several hours)
   ```bash
   qemu-system-aarch64 -M virt -m 2G -smp `nproc` -cpu cortex-a53 \
       -kernel installer-linux \
@@ -68,7 +68,7 @@ docker run -it \
   ```
   You will finally exit the QEMU env as the `-no-reboot` option supplies.
 
-  1. Extract the kernel to the `system` dir
+  5. Extract the kernel to the `system` dir
   ```bash
   # Install libguestfs (will ask a few questions)
   apt-get update && apt-get install libguestfs-tools
@@ -82,4 +82,4 @@ docker run -it \
   exit
   ```
 
-  1. Now you are good to boot your own system using the same boot command as in the `Usage` section.
+  6. Now you are good to boot your own system using the same boot command as in the `Usage` section.
