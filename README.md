@@ -1,5 +1,7 @@
 # qemu-cortex-a53
 
+[![](https://images.microbadger.com/badges/image/ljishen/qemu-cortex-a53.svg)](http://microbadger.com/images/ljishen/qemu-cortex-a53)
+
 This is the closet Raspberry Pi 3 machine emulation which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
 
 ## Motivation
