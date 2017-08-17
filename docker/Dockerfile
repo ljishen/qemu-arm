@@ -18,7 +18,7 @@ CMD ["sh", "-c", \
      "qemu-system-aarch64 -M virt -m $MEMORY -smp 2 -cpu cortex-a53 \
       -kernel $VMLINUXZ \
       -initrd $INITRD_IMG \
-      -append 'root=/dev/vda1' \
+      -append 'root=/dev/vda1 console=ttyAMA0' \
       -drive if=none,file=${DRIVE_FILE},format=qcow,id=hd \
       -device virtio-blk-pci,drive=hd \
       -netdev user,id=mynet \
