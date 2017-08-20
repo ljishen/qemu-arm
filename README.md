@@ -29,6 +29,14 @@ docker run -it \
 - 8GB disk of image
 - System info: `Linux debian 4.9.0-3-arm64 #1 SMP Debian 4.9.30-2+deb9u3 (2017-08-06) aarch64 GNU/Linux`
 
+You can use environment variables `MEMORY` and `CPUS` to change the default configurations:
+```bash
+docker run -it \
+    -e MEMORY=32G -e CPUS=8 \
+    -v `pwd`/system:/root/system \
+    ljishen/qemu-cortex-a53
+```
+
 ## Miscellaneous
 - The emulator sets up the [user networking](https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29) by default so the ICMP traffic does not work (e.g. no ping), but it is good for simple web access for the start.
 - Credit for this method goes to [this blog](https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/). I will briefly summarize the steps as follows in case the link breaks. You can always follow the guide if you want to create you own disk image in file. See the [docker/Dockerfile](https://github.com/ljishen/qemu-cortex-a53/blob/master/docker/Dockerfile) for the details of system default configurations.

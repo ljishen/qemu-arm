@@ -10,12 +10,17 @@ RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV MEMORY 2G
+ENV CPUS 2
 ENV VMLINUXZ /root/system/vmlinuz-4.9.0-3-arm64
 ENV INITRD_IMG /root/system/initrd.img-4.9.0-3-arm64
 ENV DRIVE_FILE /root/system/hda.qcow2 
 
 CMD ["sh", "-c", \
-     "qemu-system-aarch64 -M virt -m $MEMORY -smp 2 -cpu cortex-a53 \
+     "qemu-system-aarch64 \
+      -M virt \
+      -m $MEMORY \
+      -smp $CPUS \
+      -cpu cortex-a53 \
       -kernel $VMLINUXZ \
       -initrd $INITRD_IMG \
       -append 'root=/dev/vda1 console=ttyAMA0' \
