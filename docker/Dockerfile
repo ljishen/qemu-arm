@@ -11,6 +11,7 @@ RUN apt-get clean \
 
 ENV MEMORY 2G
 ENV CPUS 2
+ENV MACADDR 52:54:00:12:34:56
 ENV VMLINUXZ /root/system/vmlinuz-4.9.0-3-arm64
 ENV INITRD_IMG /root/system/initrd.img-4.9.0-3-arm64
 ENV DRIVE_FILE /root/system/hda.qcow2 
@@ -24,8 +25,8 @@ CMD ["sh", "-c", \
       -kernel $VMLINUXZ \
       -initrd $INITRD_IMG \
       -append 'root=/dev/vda1 console=ttyAMA0' \
-      -drive if=none,file=${DRIVE_FILE},format=qcow,id=hd \
-      -device virtio-blk-pci,drive=hd \
+      -drive if=none,file=${DRIVE_FILE},format=qcow,id=hd0 \
+      -device virtio-blk-pci,drive=hd0 \
       -netdev user,id=mynet \
       -device virtio-net-pci,netdev=mynet \
       -nographic"]
