@@ -10,11 +10,19 @@ This is the closet Raspberry Pi 3 machine emulation which is not running `Raspbi
 - The method introduced in the [msdn blog](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) using `versatilepb` machine only supports up to 256MB of RAM which states clearly in the [QEMU wiki](https://wiki.qemu.org/Documentation/Platforms/ARM#Guidelines_for_choosing_a_QEMU_machine). Such configuration is hardly usable.
 - Therefore, currently my final cloest solution is to emulate the ARM `Cortex-A53` CPU with machine `virt` running the Debian 9 system.
 
+## Prerequisite
+- x86 host
+
 ## Usage
 ```bash
 docker run -it \
+    -p 5555:22 \
     -v `pwd`/system:/root/system \
     ljishen/qemu-cortex-a53
+```
+We bind port 22 of the system emulator (the guest) to port 5555 of the host machine so that we can SSH access to the guest via:
+```bash
+ssh pi@localhost -p 5555
 ```
 
 ## System Defaults
@@ -32,7 +40,7 @@ docker run -it \
 You can use environment variables `MEMORY` and `CPUS` to change the default configurations:
 ```bash
 docker run -it \
-    -e MEMORY=32G -e CPUS=8 \
+    -e MEMORY=32G -e SMP=8 \
     -v `pwd`/system:/root/system \
     ljishen/qemu-cortex-a53
 ```
