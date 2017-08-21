@@ -73,14 +73,19 @@ docker run -it \
 
   4. Run the OS installer (will take several hours)
   ```bash
-  qemu-system-aarch64 -M virt -m 2G -smp `nproc` -cpu cortex-a53 \
+  qemu-system-aarch64 \
+      -M virt \
+      -m 2G \
+      -smp `nproc` \
+      -cpu cortex-a53 \
       -kernel installer-linux \
       -initrd installer-initrd.gz \
-      -drive if=none,file=system/hda.qcow2,format=qcow,id=hd \
-      -device virtio-blk-pci,drive=hd \
-      -netdev user,id=mynet \
-      -device virtio-net-pci,netdev=mynet \
-      -nographic -no-reboot
+      -drive if=none,file=system/hda.qcow2,format=qcow,id=hd0 \
+      -device virtio-blk-pci,drive=hd0 \
+      -netdev user,id=net0 \
+      -device virtio-net-pci,netdev=net0 \
+      -nographic \
+      -no-reboot
   ```
   You will finally exit the QEMU env as the `-no-reboot` option supplies.
 
