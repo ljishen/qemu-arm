@@ -65,6 +65,12 @@ docker run -it \
   wget -O installer-linux http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/linux
   wget -O installer-initrd.gz http://http.us.debian.org/debian/dists/stretch/main/installer-arm64/current/images/netboot/debian-installer/arm64/initrd.gz
   ```
+<!---
+File information of last check on:
+
+initrd.gz                                          19-Jul-2017 18:10            21500759
+linux                                              19-Jul-2017 18:10            14080512
+-->
 
   3. Create an empty disk image
   ```bash
