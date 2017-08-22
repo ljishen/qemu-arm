@@ -1,5 +1,5 @@
 # VERSION 1.0
-FROM ljishen/qemu
+FROM ljishen/qemu-arm
 MAINTAINER Jianshen Liu <jliu120@ucsc.edu>
 
 ENV MEMORY 2G
