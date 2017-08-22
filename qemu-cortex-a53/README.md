@@ -2,7 +2,7 @@
 
 [![](https://images.microbadger.com/badges/image/ljishen/qemu-cortex-a53.svg)](http://microbadger.com/images/ljishen/qemu-cortex-a53)
 
-This is a closet Raspberry Pi 3 machine emulation which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
+This is a closet Raspberry Pi 3 emulator which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
 
 ## Motivation
 - The Raspberry Pi 3 shipped with an ARM `Cortex-A53` CPU which is not included in the QEMU supported machines yet.

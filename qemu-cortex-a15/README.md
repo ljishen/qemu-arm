@@ -2,7 +2,7 @@
 
 [![](https://images.microbadger.com/badges/image/ljishen/qemu-cortex-a15.svg)](http://microbadger.com/images/ljishen/qemu-cortex-a15)
 
-This is a closet Raspberry Pi 2 machine emulation which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
+This is a closet Raspberry Pi 2 emulator which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
 
 ## Motivation
 - Even though the `raspi2` is in the QEMU supported machine list, it is not able to run the latest Raspbian system. These are the methods I have tried [1](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) (black screen), [2](https://raspberrypi.stackexchange.com/a/71172) (CPUX: failed to come online), [3](http://blog.3mdeb.com/2015/12/30/emulate-rapberry-pi-2-in-qemu/) (only shows a raspberry logo) but none of them success. (Checked on Aug 16, 2017)
