@@ -41,7 +41,7 @@ You can use environment variables `MEMORY` and `SMP` to change the default confi
 docker run -it \
     -e MEMORY=8G -e SMP=6 \
     -v `pwd`/system:/root/system \
-    ljishen/qemu-cortex-a53
+    ljishen/qemu-cortex-a15
 ```
 
 ## Miscellaneous
@@ -92,7 +92,7 @@ initrd.gz	19-Jul-2017 14:10	20M
       -device virtio-net-device,netdev=net0 \
       -nographic \
       -no-reboot
-    ```
+  ```
   You will finally exit the QEMU env as the `-no-reboot` option supplies.
 
   5. Extract the kernel to the `system` dir

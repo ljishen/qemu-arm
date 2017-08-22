@@ -105,7 +105,7 @@ linux                                              19-Jul-2017 18:10            
   virt-ls -a system/hda.qcow2 /boot
 
   virt-copy-out -a system/hda.qcow2 /boot/vmlinuz-4.9.0-3-arm64 /boot/initrd.img-4.9.0-3-arm64 system
-  
+
   # Exit docker container
   exit
   ```
