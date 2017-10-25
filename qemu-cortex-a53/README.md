@@ -1,14 +1,14 @@
-# QEMU ARM Emulator on Cortex-A53
+# An Approximation Emulator for Raspberry Pi 3 on Cortex-A53
 
 [![](https://images.microbadger.com/badges/image/ljishen/qemu-cortex-a53.svg)](http://microbadger.com/images/ljishen/qemu-cortex-a53)
 
-This is a closet Raspberry Pi 3 emulator which is not running `Raspbian` system but `Debian GNU/Linux 9 (stretch)`.
+This is a Raspberry Pi 3 emulator on the same CPU architecture Cortex-A53. It runs `Debian GNU/Linux 9 (stretch)` instead of `Raspbian`.
 
 ## Motivation
 - The Raspberry Pi 3 shipped with an ARM `Cortex-A53` CPU which is not included in the QEMU supported machines yet.
 - For the Raspberry Pi 2, though the mathine is in the [supported list](https://wiki.qemu.org/Documentation/Platforms/ARM#Supported_Machines), I failed to emulate with `raspi2` using any of these methods [1](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) (black screen), [2](https://raspberrypi.stackexchange.com/a/71172) (CPUX: failed to come online), [3](http://blog.3mdeb.com/2015/12/30/emulate-rapberry-pi-2-in-qemu/) (only shows a raspberry logo). (Checked on Aug 16, 2017)
 - The method introduced in the [msdn blog](https://blogs.msdn.microsoft.com/iliast/2016/11/10/how-to-emulate-raspberry-pi/) using `versatilepb` machine only supports up to 256MB of RAM which states clearly in the [QEMU wiki](https://wiki.qemu.org/Documentation/Platforms/ARM#Guidelines_for_choosing_a_QEMU_machine). Such configuration is hardly usable.
-- Therefore, currently my final cloest solution is to emulate the ARM `Cortex-A53` CPU with machine `virt` running the Debian 9 system.
+- Therefore, currently the feasible approximation solution is to emulate the ARM `Cortex-A53` CPU with machine `virt` running the Debian 9 system.
 
 ## Prerequisite
 - x86 host
@@ -47,7 +47,7 @@ docker run -it \
 
 ## Miscellaneous
 - The emulator sets up the [user networking](https://wiki.qemu.org/Documentation/Networking#User_Networking_.28SLIRP.29) by default so the ICMP traffic does not work (e.g. no ping), but it is good for simple web access for the start.
-- Credit for this method goes to [this blog](https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/). I will briefly summarize the steps as follows in case the link breaks. You can always follow the guide if you want to create you own disk image in file. See the [docker/Dockerfile](https://github.com/ljishen/qemu-arm/blob/master/qemu-cortex-a53/docker/Dockerfile) for the details of system default configurations.
+- Credit for this method goes to [this blog](https://translatedcode.wordpress.com/2017/07/24/installing-debian-on-qemus-64-bit-arm-virt-board/). I will briefly summarize the steps as follows in case the link gets broken. You can always follow the guide if you want to create you own disk image in file. See the [docker/Dockerfile](https://github.com/ljishen/qemu-arm/blob/master/qemu-cortex-a53/docker/Dockerfile) for the details of system default configurations.
 
   1. Launch the QEMU emulator `2.8.1` environment with
   ```bash
@@ -110,4 +110,4 @@ linux                                              19-Jul-2017 18:10            
   exit
   ```
 
-  6. Now you are good to boot your own system using the same boot command as in the `Usage` section.
+  6. Now you are good to boot your own system using the same boot command in the `Usage` section.
